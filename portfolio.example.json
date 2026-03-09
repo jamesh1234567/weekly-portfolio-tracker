@@ -1,0 +1,12 @@
+{
+     "AAPL": {
+       "shares": 10,
+       "buy_price": 150.00,
+       "currency": "USD"
+     },
+     "MSFT": {
+       "shares": 5,
+       "buy_price": 300.00,
+       "currency": "USD"
+     }
+}

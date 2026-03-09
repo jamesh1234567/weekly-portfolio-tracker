@@ -1,0 +1,7 @@
+{
+     "AAPL": {
+       "shares": 10,
+       "buy_price": 150.00,
+       "currency": "USD"
+     }
+}
