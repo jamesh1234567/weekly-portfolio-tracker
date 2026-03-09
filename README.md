@@ -1,6 +1,6 @@
 # Weekly Portfolio Tracker
    
-   Sends weekly email updates about my stock portfolio.
+   Sends weekly email updates about stock portfolio.
    
    ## Features
    - Tracks stocks in multiple currencies
