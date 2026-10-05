@@ -29,10 +29,14 @@ def get_exchange_rate(currency):
     
     try:
         ticker = f"{currency}EUR=X"
-        data = yf.download(ticker, period='1d', progress=False)
+ '''       data = yf.download(ticker, period='1d', progress=False)
         return float(data['Close'].iloc[-1])
     except:
-        return 1.0
+        return 1.0'''
+        data = yf.download(ticker, period='5d', progress=False)['Close'].dropna()
+        return float(data.iloc[-1].squeeze())
+    except:
+        raise
 
 def calculate_portfolio(portfolio):
     """Calculate total value and profit/loss"""
@@ -44,7 +48,10 @@ def calculate_portfolio(portfolio):
         try:
             # Get price data for last 7 days
             stock = yf.Ticker(ticker)
-            hist = stock.history(period='7d')
+          #  hist = stock.history(period='7d')
+            hist = stock.history(period='7d').dropna(subset=['Close'])
+            if hist.empty:
+                raise ValueError("no price data")
             current_price = float(hist['Close'].iloc[-1])
             
             # Calculate weekly change
@@ -87,7 +94,8 @@ def calculate_portfolio(portfolio):
             continue
     
     total_profit = total_value - total_cost
-    total_return = (total_profit / total_cost) * 100
+    #total_return = (total_profit / total_cost) * 100
+    total_return = (total_profit / total_cost) * 100 if total_cost else 0.0
     
     return holdings, total_value, total_profit, total_return
 
